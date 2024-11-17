@@ -1,0 +1,28 @@
+#number-buttons-container{
+    display: flex;
+    gap: 10px;
+    max-width: 200px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+}
+
+#display-container{
+    background-color: beige;
+    color:black;
+    width: 300px;
+    height: 50px;
+    text-align: right;
+    line-height: 50px;
+}
+
+#buttons-container .hover{
+    background-color: black;
+}
+.number-buttons{
+    width: 40px;
+    height: 50px;
+    background: navy;
+    color: aliceblue;
+    text-align: center;
+    line-height: 50px;
+}
