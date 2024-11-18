@@ -88,7 +88,11 @@ const operatorButtons = document.querySelectorAll(".operator-buttons");
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
         if(numberInputArray.length != 0){
-            result = operate(firstNumber, operator, secondNumber);
+            if(secondNumber == 0 && operator == "/"){
+                alert("Can't divide by 0!");
+            }else{
+                result = operate(firstNumber, operator, secondNumber);
+            }
         }
         if(result != 0){
             displayArea.textContent = "";
@@ -109,7 +113,11 @@ operatorButtons.forEach((button) => {
 const equalButton = document.querySelector("#equality-button");
 equalButton.addEventListener("click", () => {
     if(operator != "empty" && numberInputArray.length != 0 ){
-        result = operate(firstNumber, operator, secondNumber);
+        if(secondNumber ==0 && operator == "/"){
+            alert("Can't divide by 0!");
+        }else{
+            result = operate(firstNumber, operator, secondNumber);
+        }
     }
         if(result != 0){
             displayArea.textContent = "";
