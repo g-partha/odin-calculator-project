@@ -15,7 +15,7 @@ let firstNumber = 0;
 let operator = "empty";
 let secondNumber = 0;
 let result = 0;
-const numberInputArray = [];
+const numberInputArray = []; // Store numbers as they are entered
 
 function operate(num1, opr, num2){
     switch(opr){
@@ -37,6 +37,8 @@ function operate(num1, opr, num2){
 }
 
 const displayArea = document.querySelector("#display-container");
+
+// Number buttons
 
 const numberButtonsContainer = document.querySelector("#number-buttons-container");
 const numberButtons = [];
@@ -85,7 +87,9 @@ numberButtonsContainer.insertBefore(numberButtons[0], numberButtons[10]);
 const operatorButtons = document.querySelectorAll(".operator-buttons");
 operatorButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        result = operate(firstNumber, operator, secondNumber);
+        if(numberInputArray.length != 0){
+            result = operate(firstNumber, operator, secondNumber);
+        }
         if(result != 0){
             displayArea.textContent = "";
             displayArea.textContent = result;
@@ -102,3 +106,22 @@ operatorButtons.forEach((button) => {
     });
 });
 
+const equalButton = document.querySelector("#equality-button");
+equalButton.addEventListener("click", () => {
+    if(operator != "empty" && numberInputArray.length != 0 ){
+        result = operate(firstNumber, operator, secondNumber);
+    }
+        if(result != 0){
+            displayArea.textContent = "";
+            displayArea.textContent = result;
+        }
+        firstNumber = result;
+        operator = "empty";
+        numberInputArray.splice(0, numberInputArray.length);
+});
+equalButton.addEventListener("mouseenter", () => {
+    equalButton.classList.add("hover");
+});
+equalButton.addEventListener("mouseleave", () => {
+    equalButton.classList.remove("hover");
+});

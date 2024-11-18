@@ -1,5 +1,6 @@
 #buttons-container .hover{
     background-color: black;
+    color: white;
 }
 
 #number-buttons-container{
@@ -25,7 +26,7 @@
 
 }
 
-.operator-buttons{
+.operator-buttons, #equality-button{
     width: 40px;
     height: 50px;
     text-align: center;
