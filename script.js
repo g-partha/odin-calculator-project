@@ -12,8 +12,9 @@ function divide(num1, num2){
 }
 
 let firstNumber = 0;
-let operator = " ";
+let operator = "empty";
 let secondNumber = 0;
+let result = 0;
 const numberInputArray = [];
 
 function operate(num1, opr, num2){
@@ -30,6 +31,8 @@ function operate(num1, opr, num2){
         case "/":
             return divide(num1, num2);
             break;
+        case "empty":
+            return secondNumber;
     }
 }
 
@@ -39,11 +42,11 @@ const numberButtonsContainer = document.querySelector("#number-buttons-container
 const numberButtons = [];
 for(let i = 0; i < 10; i++){
     numberButtons[i] = document.createElement("div");
-    numberButtons[i].innerHTML = i;
+    numberButtons[i].textContent = i;
 }
 
 numberButtons[10] = document.createElement("div");
-numberButtons[10].innerHTML = ".";
+numberButtons[10].textContent = ".";
 
 for(let i = 0; i <= 10; i++){
     numberButtons[i].classList.add("number-buttons");
@@ -64,7 +67,8 @@ for(let i = 0; i <= 10; i++){
             }
         }
         secondNumber = +(numberInputArray.join(""));
-        displayArea.innerHTML = numberInputArray.join("");
+        displayArea.textContent = "";
+        displayArea.textContent = numberInputArray.join("");
     });
 
     numberButtons[i].addEventListener("mouseenter", () => {
@@ -75,4 +79,26 @@ for(let i = 0; i <= 10; i++){
     })
 }
 numberButtonsContainer.insertBefore(numberButtons[0], numberButtons[10]);
+
+// Operator buttons
+
+const operatorButtons = document.querySelectorAll(".operator-buttons");
+operatorButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        result = operate(firstNumber, operator, secondNumber);
+        if(result != 0){
+            displayArea.textContent = "";
+            displayArea.textContent = result;
+        }
+        firstNumber = result;
+        operator = button.textContent;
+        numberInputArray.splice(0, numberInputArray.length);
+    });
+    button.addEventListener("mouseenter", () => {
+        button.classList.add("hover");
+    });
+    button.addEventListener("mouseleave", () => {
+        button.classList.remove("hover");
+    });
+});
 
