@@ -1,45 +1,97 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: solid red 1px; */
+}
+
+#container{
+    width: 405px;
+    padding: 5px;
+    margin: 100px auto;
+    background-color: rgb(117, 117, 117);
+}
+#buttons-container{
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    width: 395px;
+}
 #buttons-container .hover{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.685);
     color: white;
 }
 
+#action-number-buttons-container{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#action-buttons-container{
+    display: flex;
+    gap: 5px;
+}
+
+.action-buttons{
+    width: 90px;
+    height: 70px;
+    background-color: rgba(146, 18, 146, 0.9);
+    color:aliceblue;
+    text-align: center;
+    line-height: 70px;
+    flex-grow: 1;
+    border-radius: 6px;
+    font-size: 20px;
+    user-select: none;
+}
 #number-buttons-container{
     display: flex;
-    gap: 10px;
-    max-width: 200px;
-    box-sizing: border-box;
+    gap: 5px;
+    width: 280px;
     flex-wrap: wrap;
 }
 
 .number-buttons{
-    width: 40px;
-    height: 50px;
-    background: navy;
+    width: 90px;
+    height: 70px;
+    background: rgba(12, 12, 189, 0.9);
     color: aliceblue;
     text-align: center;
-    line-height: 50px;
+    line-height: 70px;
+    border-radius: 6px;
+    font-size: 30px;
+    user-select: none;
 }
 
 #operator-buttons-container{
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 5px;
 
 }
 
 .operator-buttons, #equality-button{
-    width: 40px;
-    height: 50px;
+    width: 90px;
+    height: 70px;
     text-align: center;
-    line-height: 50px;
-    background-color: bisque;
+    line-height: 70px;
+    background-color: rgba(8, 106, 106, 0.9);
+    color: white;
+    border-radius: 6px;
+    font-size: 30px;
+    user-select: none;
 }
 
 #display-container{
-    background-color: beige;
+    background-color: rgb(233, 233, 233);
     color:black;
-    width: 300px;
-    height: 50px;
+    width: 375px;
+    height: 100px;
     text-align: right;
-    line-height: 50px;
+    line-height: 100px;
+    margin: 10px 10px 0 10px;
+    font-size: 60px;
+    border-radius: 6px;
 }
 
