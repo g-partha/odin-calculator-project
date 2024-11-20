@@ -105,10 +105,10 @@ function clickOperatorButton(){
             if(resultString.length > 10){
                 if(resultString.includes(".")){
                     displayArea.textContent = resultString[0] + resultString[1] 
-                                        + resultString[2] + "e ^ " + (resultString.length - 1);
+                                        + resultString[2] + " e^" + (resultString.length - 1);
                 }else{
                     displayArea.textContent = resultString[0] + "." + resultString[1] 
-                                        + resultString[2] + "e ^ " + (resultString.length - 1);
+                                        + resultString[2] + " e^" + (resultString.length - 1);
                 }
             }else{
                 displayArea.textContent = result;
@@ -118,17 +118,14 @@ function clickOperatorButton(){
             secondNumber = numberInputArray.join("");
             operator = this.textContent;
 
-        }
-
-        if(numberInputArray.length != 0 && operator == "empty"){
+        }else if(numberInputArray.length != 0 && operator == "empty"){
             firstNumber = secondNumber;
             numberInputArray.splice(0, numberInputArray.length);
             secondNumber = numberInputArray.join("");
             operator = this.textContent;
+        }else if(numberInputArray.length == 0 && operator == "empty"){
+            operator = this.textContent;
         }
-
-        
-
 }
 
 operatorButtons.forEach((button) => {
@@ -164,10 +161,10 @@ function clickEqualButton(){
         if(resultString.length > 10){
             if(resultString.includes(".")){
                 displayArea.textContent = resultString[0] + resultString[1] 
-                                    + resultString[2] + "e ^ " + (resultString.length - 1);
+                                    + resultString[2] + "e^" + (resultString.length - 1);
             }else{
                 displayArea.textContent = resultString[0] + "." + resultString[1] 
-                                    + resultString[2] + "e ^ " + (resultString.length - 1);
+                                    + resultString[2] + "e^" + (resultString.length - 1);
             }
         }else{
             displayArea.textContent = result;
@@ -176,8 +173,7 @@ function clickEqualButton(){
         numberInputArray.splice(0, numberInputArray.length);
         secondNumber = numberInputArray.join("");
         operator = "empty";
-    }
-    if(operator == "empty" && numberInputArray.length != 0 ){
+    }else if(operator == "empty" && numberInputArray.length != 0 ){
         firstNumber == secondNumber;
         numberInputArray.splice(0, numberInputArray.length);
         secondNumber = numberInputArray.join("");
