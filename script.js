@@ -34,7 +34,8 @@ function operate(num1, opr, num2){
     }
 }
 
-const displayArea = document.querySelector("#display-container");
+const displayAreaSmall = document.querySelector("#display-container-small");
+const displayAreaLarge = document.querySelector("#display-container-large");
 
 // Number buttons
 const numberButtonsContainer = document.querySelector("#number-buttons-container");
@@ -66,8 +67,8 @@ for(let i = 0; i <= 10; i++){
             }
         }
         secondNumber = +(numberInputArray.join(""));
-        displayArea.textContent = "";
-        displayArea.textContent = numberInputArray.join("");
+        displayAreaLarge.textContent = "";
+        displayAreaLarge.textContent = numberInputArray.join("");
         if(firstNumber != "" && operator == "empty"){
             firstNumber = 0;
         }
@@ -100,31 +101,83 @@ function clickOperatorButton(){
                 let resultBeforeRounding = operate(firstNumber, operator, secondNumber);
                 result = (Math.round(resultBeforeRounding * 100) / 100);
             }
-            displayArea.textContent = "";
+            displayAreaLarge.textContent = "";
             let resultString = result.toString();
             if(resultString.length > 10){
                 if(resultString.includes(".")){
-                    displayArea.textContent = resultString[0] + resultString[1] 
+                    displayAreaLarge.textContent = resultString[0] + resultString[1] 
                                         + resultString[2] + "e^" + (resultString.length - 1);
                 }else{
-                    displayArea.textContent = resultString[0] + "." + resultString[1] 
+                    displayAreaLarge.textContent = resultString[0] + "." + resultString[1] 
                                         + resultString[2] + "e^" + (resultString.length - 1);
                 }
             }else{
-                displayArea.textContent = result;
+                displayAreaLarge.textContent = result;
             }
             firstNumber = result;
             numberInputArray.splice(0, numberInputArray.length);
             secondNumber = numberInputArray.join("");
             operator = this.textContent;
 
+            let firstNumberString = firstNumber.toString();
+            if(firstNumberString.length > 10){
+                if(firstNumberString.includes(".")){
+                    displayAreaSmall.textContent = firstNumberString[0] + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }else{
+                    displayAreaSmall.textContent = firstNumberString[0] + "." + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }
+            }else{
+                displayAreaSmall.textContent = `${firstNumber} ${operator}`;
+            }
+
         }else if(numberInputArray.length != 0 && operator == "empty"){
             firstNumber = secondNumber;
             numberInputArray.splice(0, numberInputArray.length);
             secondNumber = numberInputArray.join("");
             operator = this.textContent;
+            let firstNumberString = firstNumber.toString();
+            if(firstNumberString.length > 10){
+                if(firstNumberString.includes(".")){
+                    displayAreaSmall.textContent = firstNumberString[0] + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }else{
+                    displayAreaSmall.textContent = firstNumberString[0] + "." + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }
+            }else{
+                displayAreaSmall.textContent = `${firstNumber} ${operator}`;
+            }
         }else if(numberInputArray.length == 0 && operator == "empty"){
             operator = this.textContent;
+            let firstNumberString = firstNumber.toString();
+            if(firstNumberString.length > 10){
+                if(firstNumberString.includes(".")){
+                    displayAreaSmall.textContent = firstNumberString[0] + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }else{
+                    displayAreaSmall.textContent = firstNumberString[0] + "." + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }
+            }else{
+                displayAreaSmall.textContent = `${firstNumber} ${operator}`;
+            }
+        }else if(numberInputArray.length ==  0 && operator != "empty"){
+            operator = this.textContent;
+            let firstNumberString = firstNumber.toString();
+            if(firstNumberString.length > 10){
+                if(firstNumberString.includes(".")){
+                    displayAreaSmall.textContent = firstNumberString[0] + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }else{
+                    displayAreaSmall.textContent = firstNumberString[0] + "." + firstNumberString[1] 
+                                        + firstNumberString[2] + "e^" + (firstNumberString.length - 1) + operator;
+                }
+            }else{
+                displayAreaSmall.textContent = `${firstNumber} ${operator}`;
+            }
+
         }
 }
 
@@ -156,18 +209,18 @@ function clickEqualButton(){
             let resultBeforeRounding = operate(firstNumber, operator, secondNumber);
             result = (Math.round(resultBeforeRounding * 100) / 100);
         }
-        displayArea.textContent = "";
+        displayAreaLarge.textContent = "";
         let resultString = result.toString();
         if(resultString.length > 10){
             if(resultString.includes(".")){
-                displayArea.textContent = resultString[0] + resultString[1] 
+                displayAreaLarge.textContent = resultString[0] + resultString[1] 
                                     + resultString[2] + "e^" + (resultString.length - 1);
             }else{
-                displayArea.textContent = resultString[0] + "." + resultString[1] 
+                displayAreaLarge.textContent = resultString[0] + "." + resultString[1] 
                                     + resultString[2] + "e^" + (resultString.length - 1);
             }
         }else{
-            displayArea.textContent = result;
+            displayAreaLarge.textContent = result;
         }
         firstNumber = result;
         numberInputArray.splice(0, numberInputArray.length);
@@ -200,8 +253,8 @@ deleteButton.addEventListener("click", () => {
     if(numberInputArray.length != 0){
         numberInputArray.pop();
         secondNumber = +(numberInputArray.join(""));
-        displayArea.textContent = "";
-        displayArea.textContent = numberInputArray.join("");
+        displayAreaLarge.textContent = "";
+        displayAreaLarge.textContent = numberInputArray.join("");
     }
 });
 deleteButton.addEventListener("mouseenter", () => {
@@ -225,7 +278,8 @@ allClearButton.addEventListener("click", () => {
     operator = "empty";
     result = 0;
     numberInputArray.splice(0, numberInputArray.length);
-    displayArea.textContent = "";
+    displayAreaLarge.textContent = "";
+    displayAreaSmall.textContent = "";
 });
 allClearButton.addEventListener("mouseenter", () => {
     allClearButton.classList.add("hover");
