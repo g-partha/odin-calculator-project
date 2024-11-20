@@ -11,7 +11,7 @@ function divide(num1, num2){
     return num1 / num2;
 }
 
-let firstNumber = 0;
+let firstNumber = "";
 let operator = "empty";
 let secondNumber = 0;
 let result = 0;
@@ -31,8 +31,6 @@ function operate(num1, opr, num2){
         case "/":
             return divide(num1, num2);
             break;
-        case "empty":
-            return secondNumber;
     }
 }
 
@@ -70,6 +68,9 @@ for(let i = 0; i <= 10; i++){
         secondNumber = +(numberInputArray.join(""));
         displayArea.textContent = "";
         displayArea.textContent = numberInputArray.join("");
+        if(firstNumber != "" && operator == "empty"){
+            firstNumber = 0;
+        }
     });
 
     numberButtons[i].addEventListener("mouseenter", () => {
@@ -92,21 +93,42 @@ numberButtons[0].style.cssText = "flex-grow: 1;";
 const operatorButtons = document.querySelectorAll(".operator-buttons");
 
 function clickOperatorButton(){
-        if(numberInputArray.length != 0){
+        if(numberInputArray.length != 0 && operator != "empty"){
             if(secondNumber == 0 && operator == "/"){
                 alert("Can't divide by 0!");
             }else{
                 let resultBeforeRounding = operate(firstNumber, operator, secondNumber);
                 result = (Math.round(resultBeforeRounding * 100) / 100);
             }
-        }
-        if(result != 0){
             displayArea.textContent = "";
-            displayArea.textContent = result;
+            let resultString = result.toString();
+            if(resultString.length > 10){
+                if(resultString.includes(".")){
+                    displayArea.textContent = resultString[0] + resultString[1] 
+                                        + resultString[2] + "e ^ " + (resultString.length - 1);
+                }else{
+                    displayArea.textContent = resultString[0] + "." + resultString[1] 
+                                        + resultString[2] + "e ^ " + (resultString.length - 1);
+                }
+            }else{
+                displayArea.textContent = result;
+            }
+            firstNumber = result;
+            numberInputArray.splice(0, numberInputArray.length);
+            secondNumber = numberInputArray.join("");
+            operator = this.textContent;
+
         }
-        firstNumber = result;
-        operator = this.textContent;
-        numberInputArray.splice(0, numberInputArray.length);
+
+        if(numberInputArray.length != 0 && operator == "empty"){
+            firstNumber = secondNumber;
+            numberInputArray.splice(0, numberInputArray.length);
+            secondNumber = numberInputArray.join("");
+            operator = this.textContent;
+        }
+
+        
+
 }
 
 operatorButtons.forEach((button) => {
@@ -131,20 +153,35 @@ const equalButton = document.querySelector("#equality-button");
 
 function clickEqualButton(){
     if(operator != "empty" && numberInputArray.length != 0 ){
-                if(secondNumber == 0 && operator == "/"){
-                    alert("Can't divide by 0!");
-                }else{
-                    let resultBeforeRounding = operate(firstNumber, operator, secondNumber);
-                    result = (Math.round(resultBeforeRounding * 100) / 100);
-                }
+        if(secondNumber == 0 && operator == "/"){
+            alert("Can't divide by 0!");
+        }else{
+            let resultBeforeRounding = operate(firstNumber, operator, secondNumber);
+            result = (Math.round(resultBeforeRounding * 100) / 100);
+        }
+        displayArea.textContent = "";
+        let resultString = result.toString();
+        if(resultString.length > 10){
+            if(resultString.includes(".")){
+                displayArea.textContent = resultString[0] + resultString[1] 
+                                    + resultString[2] + "e ^ " + (resultString.length - 1);
+            }else{
+                displayArea.textContent = resultString[0] + "." + resultString[1] 
+                                    + resultString[2] + "e ^ " + (resultString.length - 1);
             }
-            if(result != 0){
-                displayArea.textContent = "";
-                displayArea.textContent = result;
-            }
-            firstNumber = result;
-            operator = "empty";
-            numberInputArray.splice(0, numberInputArray.length);
+        }else{
+            displayArea.textContent = result;
+        }
+        firstNumber = result;
+        numberInputArray.splice(0, numberInputArray.length);
+        secondNumber = numberInputArray.join("");
+        operator = "empty";
+    }
+    if(operator == "empty" && numberInputArray.length != 0 ){
+        firstNumber == secondNumber;
+        numberInputArray.splice(0, numberInputArray.length);
+        secondNumber = numberInputArray.join("");
+    }     
 }
 
 equalButton.addEventListener("click", clickEqualButton);
