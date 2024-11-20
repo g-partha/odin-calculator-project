@@ -222,6 +222,7 @@ function clickEqualButton(){
         }else{
             displayAreaLarge.textContent = result;
         }
+        displayAreaSmall.textContent = displayAreaLarge.textContent;
         firstNumber = result;
         numberInputArray.splice(0, numberInputArray.length);
         secondNumber = numberInputArray.join("");
@@ -230,7 +231,10 @@ function clickEqualButton(){
         firstNumber == secondNumber;
         numberInputArray.splice(0, numberInputArray.length);
         secondNumber = numberInputArray.join("");
-    }     
+    }else if(operator != "empty" && numberInputArray.length == 0){
+        operator = "empty";
+        displayAreaSmall.textContent = displayAreaLarge.textContent;
+    }
 }
 
 equalButton.addEventListener("click", clickEqualButton);
