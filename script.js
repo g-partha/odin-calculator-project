@@ -105,10 +105,10 @@ function clickOperatorButton(){
             if(resultString.length > 10){
                 if(resultString.includes(".")){
                     displayArea.textContent = resultString[0] + resultString[1] 
-                                        + resultString[2] + " e^" + (resultString.length - 1);
+                                        + resultString[2] + "e^" + (resultString.length - 1);
                 }else{
                     displayArea.textContent = resultString[0] + "." + resultString[1] 
-                                        + resultString[2] + " e^" + (resultString.length - 1);
+                                        + resultString[2] + "e^" + (resultString.length - 1);
                 }
             }else{
                 displayArea.textContent = result;
